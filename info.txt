@@ -1,0 +1,48 @@
+robots.txt
+Es un archivo que todo sitio web debe llevar, en el cual especificamos qué rutas de nuestro sitio web permite webscrapping, siguiendo la siguiente estructura:
+User-Agent: * # Se colocan los usuarios, si es un * quiere decir cualquier persona o script
+
+Allow: /  # Los path que nuestro sitio web permite acceso a esos usuario, si es / quiere decir cualquier dirección
+
+Ahora podría seguir una lista de Dissalow, en la cual especifica las rutas a las que no se podrán acceder
+
+#####  Xpath  #####
+
+Para buscar texto o etiqeutas HTML usando Xpath, nos vamos al a consola y:
+
+$x('')
+Ponemos adentro la dirección
+/ Para hacer referencia al documento y navegar etiqueta por etiqueta ('/html/body/div/span')
+// Para navegar o hacer referencia a una etiqueta html ('//div//img')
+elemento/.. Para obtener los contenedores padres que contengan el elemento ('//img/..')
+$x('elemento/text()').map(x => x.wholeText)  Para obtener todos los textos de las etiquetas especificadas
+$x('elemento/*')  Para obtener todos los elementos que contiene ese elemento
+$x('//*') Nos trae todos los elementos HTML
+$x('/elemento/@*') Para traer todos los atributos del elemento buscado
+$x('elemento/node()') Para traer todos los elementos HTML del elemento junto con su contenido
+
+PREDICADOS 
+/@atributo Para obtener atributos de etiquetas ('//img/@src')
+elemento[n] Para obtener el elemento número n empezando a contar desde el 1 ('//span[2]'), (//span[last()])
+elemento[@attr] Para obtener todas los elementos que tengan un atributo attr ('//div[@class]')
+elemento[@attr="vañue"] Para filtrar los elementos por valor de atreibuto ('//p[@class="text-center"]')
+elemento[@attr1="value" and @attr2="value"]
+
+IN-TEXT SEARCH
+elemento[starts-with(.,"A")] Busca todos los textos cuyo texto empieza con "a"
+elemento[ends-with(.,"o")] Busca todos los textos que terminan en "o"
+elemento[contains(.,"fe")] Busca todos los textos que contienen en "fe"
+elemento[matches(.,"A.*r")] Busca todos los textos que empiezan en A y terminan en r
+
+AXES
+$x('elemento/child::elemento')  Retorna los hijos directos del elemento
+$x('elemento/parent::elemento') Retorna el padre directo del elemento
+$x('elemento/ancestor::elemento') Retorna a los padre y abuelos del elemento
+$x('elemento/descendant::elemento') Retorna todos los elementos que están por debajo
+$x('elemento/descendant-or-self::elemento') Retorna el nodo actual más lo mimo que el de arriba
+
+
+
+#####  RICO Y DELICIOSA PYTHON  #####
+
+pip install requests xlml autopep8
