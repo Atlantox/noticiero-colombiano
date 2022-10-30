@@ -1,0 +1,7 @@
+Links = 
+Base URL: https://www.larepublica.co/
+All news of a section: //div[@class="row news H_img_V_Title_Lead m-0"]/div/a/@href
+Title of a new in the news list: //div[@class="row news H_img_V_Title_Lead m-0"]/div[2]/h2/a/text()
+Title of a new: //div[@class="mb-auto"]/h2/span/text()
+Abstract of a new: //div[@class="lead"]/p/text()
+Full content of a new:  //div[@class="html-content"]/p/text()
