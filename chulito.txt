@@ -1,0 +1,70 @@
+Web scraping: Extraer información de un sitio web
+Web crawling: Conocer la estructura de un sitio web
+
+si obtenermos una página usando requests.get podemos ver su texto haciendo 
+page = requests.get(url)
+page.text
+
+Si necesitamos ver su contenido usamos
+page.content
+
+La primera letra de ese content nos indicará que tipo de datos almacena, si es una b son bytes
+
+page.headers
+Nos muestra la cabecera de la respuesta HTTP
+
+page.request.headers
+Nos muestra la cabecera de la petición HTTP
+
+page.request.method
+Nos muestra el método de la petición
+
+page.request.url
+Nos muestra la url a la que accedimos porque puede que nos redireccionen y estemos en otra
+
+#####  PYTHON  #####
+
+from bs4 import BeautifulSoup 
+
+s = BeautifulSoup(page.text, 'lxml')  # Lee el contenido html de una página y nos regresa de manera estructurada todo su contenido
+
+s.prettify()  # Nos muestra el conteniddo HTML como lo veríamos en el inspector
+
+s.find('elemento')  # Retorna el primer elemento especificado que encuentre
+
+s.find('elemento', attr={'propiedad':'valor'})  # Retorna el primer elemento con los atributos especificados que encuentre
+
+s.find_all('elemento')  # Encuentra todos los elementos especificados como una LISTA
+
+Si sabemos que el elemento HTML solo tiene un hijo podemos llamarlo por su nombre
+s.div
+
+Para obtener atributos de elementos HTML, usamos
+s.img.get('src')
+
+Si deseamos obtener el texto
+
+s.get_text()
+
+Para extraer una imagen, primero debemos extraer su link y hacerle request puto sin el 'lxml'
+image_src = requests.get('link')
+Si usamos image_src.content Veremos su contenido puro
+
+Para ver la imagen
+from IPython.display import Image
+Image(image_src.content)
+
+
+#####  SELENIUM  #####
+
+pip install selenium
+conda install -c conda-forge selenium
+
+Hay que instalar un driver a tu navegador, debes buscarlo como "selenium driver navegador" y al descargarlo debes poner el archivo en la raíz del usuario porque vamos a requerirlo desde jupyter notebook
+
+from selenium import webdriver
+
+Lo primero que debemos hacer es instanciar el driver
+
+driver = webdriver.NavegadorQueUsas(executable_path='../drivername que descargaste')
+

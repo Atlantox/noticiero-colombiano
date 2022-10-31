@@ -1,5 +1,4 @@
 import os
-from tkinter.tix import DisplayStyle
 import requests
 from lxml import html as html
 from rich import print
@@ -15,6 +14,7 @@ XPATH_NEW_ABSTRACT = '//div[@class="lead"]/p/text()'
 XPATH_NEW_CONTENT = '//div[@class="html-content"]/p/text()'
 
 def run():
+    ''''Ask for the news category to see'''
     clear()
     print('[yellow]NOTICIERO[/yellow] [cyan]COLOMBIANO[/cyan] [red]AL INSTANTE[red]')
     print('[yellow]Qué noticias deseas explorar?[/yellow]')
@@ -47,7 +47,7 @@ def run():
         print('[red]Opción incorrecta[/red]')
         return
 
-    url += section
+    url += section  # Creating URL to request
 
     try:
         response = requests.get(url)
@@ -75,6 +75,7 @@ def run():
             print('[red]Ocurrió un error[/red]')
 
 def display_news(news):
+    '''Shows all news of the selected category'''
     clear()
     news_to_display = 15
     grouped_news = [news[i:i+news_to_display] for i in range(0,len(news), news_to_display)]
@@ -118,6 +119,7 @@ def display_news(news):
     show_new(news[selected - 1])
 
 def show_new(new):
+    '''Show the title, abstract and content of selected new'''
     clear()
     response = requests.get(new['link'])
     if response.status_code == 200:
@@ -155,8 +157,6 @@ def show_new(new):
 
     else:
         print(f'[red]Error: {response.status_code}[/red]')
-
-
 
 
 if __name__ == '__main__':
